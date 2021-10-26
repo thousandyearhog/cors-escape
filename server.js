@@ -1,4 +1,4 @@
-const debug = require('debug')('cors-escape');
+/*const debug = require('debug')('cors-escape');*/
 const host = process.env.HOST || '0.0.0.0';
 const port = process.env.PORT || 2000;
 
@@ -6,12 +6,12 @@ const port = process.env.PORT || 2000;
 // again. CORS Escape is open by design, and this blacklist is not used, except for countering
 // immediate abuse (e.g. denial of service). If you want to block all origins except for some,
 // use originWhitelist instead.
-const {parseEnvVarAsList} = require('./lib/helpers');
+const { parseEnvVarAsList } = require('./lib/helpers');
 const originBlacklist = parseEnvVarAsList(process.env.CORSESCAPE_BLACKLIST);
 const originWhitelist = parseEnvVarAsList(process.env.CORSESCAPE_WHITELIST);
 
-debug('Blacklisting origins: ' + originBlacklist);
-debug('Whitelisting origins: ' + originWhitelist);
+/*debug('Blacklisting origins: ' + originBlacklist);
+debug('Whitelisting origins: ' + originWhitelist);*/
 
 // Set up rate-limiting to avoid abuse of the public server.
 const checkRateLimit = require('./lib/rate-limit')(process.env.CORSESCAPE_RATELIMIT);
@@ -20,7 +20,7 @@ const corsProxy = require('./lib/cors-escape');
 corsProxy.createServer({
     originBlacklist,
     originWhitelist,
-    requireHeaders: ['origin'],
+    requireHeaders: [/*'origin'*/],
     checkRateLimit,
     removeHeaders: [
         // Strip Heroku-specific headers
